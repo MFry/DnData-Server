@@ -18,11 +18,6 @@ class Race(models.Model):
     url = models.URLField()
 
 
-class CharacterRace(models.Model):
-    name = models.TextField()
-    url = models.URLField()
-
-
 class CharacterSubrace(models.Model):
     name = models.TextField()
     url = models.URLField()
@@ -37,6 +32,9 @@ class Character(models.Model):
     name = models.TextField()
     character_class = models.ForeignKey(CharacterClass, on_delete=models.CASCADE)
     character_subClass = models.ForeignKey(CharacterSubclass, on_delete=models.CASCADE)
+    character_subRace = models.ForeignKey(
+        CharacterSubrace, blank=True, null=True, on_delete=models.CASCADE
+    )
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
     url = models.URLField()

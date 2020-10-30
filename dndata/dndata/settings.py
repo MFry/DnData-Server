@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "graphene_django",
 ]
 
-GRAPHENE = {"SCHEMA": "app.schema.schema"}  # Where your Graphene schema lives
+GRAPHENE = {"SCHEMA": "data.schema.schema"}  # Where your Graphene schema lives
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -92,9 +92,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
