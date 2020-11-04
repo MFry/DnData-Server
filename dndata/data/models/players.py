@@ -1,29 +1,43 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from .campain import Campaign
+
+
+class CharacterClassManager(models.Manager):
+    def create_class(self, name: str, url: str):
+        character_class = self.create(name=name, url=url)
+        return character_class
 
 
 class CharacterClass(models.Model):
-    name = models.TextField()
+    name = models.TextField(unique=True)
     url = models.URLField()
+
+    objects = CharacterClassManager()
+
+
+class CharacterSubclassManager(models.Manager):
+    def create_class(self, name: str, url: str, character_class):
+        character_class = self.create(
+            name=name, url=url, character_class=character_class
+        )
+        return character_class
 
 
 class CharacterSubclass(models.Model):
-    subClass = models.TextField()
+    name = models.TextField()
     character_class = models.ForeignKey(CharacterClass, on_delete=models.CASCADE)
     url = models.URLField()
 
+    objects = CharacterSubclassManager()
+
 
 class Race(models.Model):
-    name = models.TextField()
+    name = models.TextField(unique=True)
     url = models.URLField()
 
 
 class CharacterSubrace(models.Model):
-    name = models.TextField()
-    url = models.URLField()
-
-
-class Campaign(models.Model):
     name = models.TextField()
     url = models.URLField()
 
