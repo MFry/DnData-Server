@@ -1,9 +1,10 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.db.models.manager import Manager
 from .campain import Campaign
 
 
-class CharacterClassManager(models.Manager):
+class CharacterClassManager(Manager):
     def create_class(self, name: str, url: str):
         character_class = self.create(name=name, url=url)
         return character_class
@@ -16,7 +17,7 @@ class CharacterClass(models.Model):
     objects = CharacterClassManager()
 
 
-class CharacterSubclassManager(models.Manager):
+class CharacterSubclassManager(Manager):
     def create_class(self, name: str, url: str, character_class):
         character_class = self.create(
             name=name, url=url, character_class=character_class
@@ -32,9 +33,17 @@ class CharacterSubclass(models.Model):
     objects = CharacterSubclassManager()
 
 
+class RaceManager(Manager):
+    def create_race(self, name: str, url: str):
+        race = self.create(name=name, url=url)
+        return race
+
+
 class Race(models.Model):
     name = models.TextField(unique=True)
     url = models.URLField()
+
+    objects = RaceManager()
 
 
 class CharacterSubrace(models.Model):

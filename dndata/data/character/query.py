@@ -8,6 +8,7 @@ class Query(ObjectType):
     all_campaigns = graphene.List(CampaignType)
     all_characters = graphene.List(CharacterType)
     all_character_classes = graphene.List(CharacterClassType)
+    all_races = graphene.List(CharacterRaceType)
     all_campaign_characters = graphene.List(
         CharacterType, campaign_name=graphene.String(required=True)
     )
@@ -20,6 +21,9 @@ class Query(ObjectType):
 
     def resolve_all_character_classes(root, info):
         return CharacterClassModel.objects.all()
+
+    def resolve_all_races(root, info):
+        return RaceModel.objects.all()
 
     def resolve_all_campaign_characters(root, info, campaign_name):
         try:

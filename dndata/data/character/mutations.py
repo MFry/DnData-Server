@@ -1,3 +1,4 @@
+from inspect import Arguments
 import graphene
 from graphene import Mutation, ObjectType
 from graphql import GraphQLError
@@ -8,6 +9,20 @@ from ..models.players import *
 #     id = graphene.ID()
 #     name = graphene.String()
 #     character_class = graphene.ID()
+
+
+class CreateRace(Mutation):
+    id = graphene.ID()
+    name = graphene.String()
+    url = graphene.String()
+
+    class Arguments:
+        name = graphene.String(required=True)
+        url = graphene.String()
+
+    def mutate(self, info, name, url):
+        race = Race.objects.create_race(name=name, url=url)
+        return CreateRace(id=race.pk, name=race.name, url=race.url)
 
 
 class CreateCharacterSubclass(Mutation):
@@ -66,3 +81,4 @@ class CreateCharacterClass(Mutation):
 class Mutation(ObjectType):
     create_character_class = CreateCharacterClass.Field()
     create_character_subclass = CreateCharacterSubclass.Field()
+    create_race = CreateRace.Field()
