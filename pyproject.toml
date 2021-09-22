@@ -6,7 +6,7 @@ authors = ["Michal Frystacky <codefry@pm.me>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-Django = "^3.1.2"
+Django = "^3.1.13"
 graphene-django = "^2.13.0"
 
 [tool.poetry.dev-dependencies]
